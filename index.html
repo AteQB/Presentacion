@@ -1,591 +1,175 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Atenas Quintana · Estrategia QA, formación y AI Testing LATAM</title>
-<meta name="description" content="Servicios de estrategia QA, diseño de pruebas, automatización y formación para LATAM. Evalúa gratis tus casos de prueba con AI Testing CaseLab.">
-<meta name="robots" content="index,follow">
-<link rel="canonical" href="https://aitesting.lat/">
-<meta property="og:title" content="Atenas Quintana · Calidad de software inteligente">
-<meta property="og:description" content="Servicios QA, formación y un evaluador gratuito de casos de prueba para equipos y profesionales de LATAM.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://aitesting.lat/">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Jost:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --navy:#0D2137;
-  --teal:#37AEB2;
-  --teal-light:#4ec5c9;
-  --teal-pale:#eaf7f8;
-  --orange:#F96819;
-  --gray:#5a6a7a;
-  --gray-l:#8fa8ba;
-  --off:#f7fafc;
-  --white:#ffffff;
-  --bd:rgba(13,33,55,0.09);
-  --ff-d:'Playfair Display',Georgia,serif;
-  --ff-b:'Jost',sans-serif;
-  --ff-m:'DM Mono',monospace;
-}
-html{scroll-behavior:smooth}
-body{font-family:var(--ff-b);background:var(--white);color:var(--navy);overflow-x:hidden}
-
-/* ── NAV ── */
-nav{position:fixed;top:0;left:0;right:0;z-index:500;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 48px;background:rgba(255,255,255,0.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--bd);box-shadow:0 1px 12px rgba(13,33,55,0.06)}
-.nav-logo{display:flex;align-items:center;text-decoration:none;height:38px}
-.nav-logo img{height:38px;width:auto;object-fit:contain}
-.nav-links{display:flex;gap:28px;list-style:none}
-.nav-links a{font-family:var(--ff-m);font-size:10px;font-weight:500;color:var(--gray);text-decoration:none;letter-spacing:1.2px;text-transform:uppercase;transition:color .2s}
-.nav-links a:hover{color:var(--teal)}
-.nav-cta{background:var(--navy);color:var(--white);padding:9px 20px;font-family:var(--ff-m);font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:1px;text-decoration:none;border-radius:2px;transition:background .2s;white-space:nowrap}
-.nav-cta:hover{background:var(--teal)}
-
-/* ── HERO ── */
-.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:100px 52px 64px;gap:72px;background:var(--white);position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;top:-180px;right:-180px;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,rgba(55,174,178,0.07) 0%,transparent 70%);pointer-events:none}
-.hero::after{content:'';position:absolute;bottom:-80px;left:-80px;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(249,104,25,0.05) 0%,transparent 70%);pointer-events:none}
-.hero-content{position:relative;z-index:1}
-.hero-tag{display:inline-flex;align-items:center;gap:8px;font-family:var(--ff-m);font-size:9.5px;color:var(--teal);letter-spacing:2px;text-transform:uppercase;background:var(--teal-pale);padding:7px 13px;border-left:3px solid var(--teal);margin-bottom:26px}
-h1.hero-title{font-family:var(--ff-d);font-size:clamp(36px,4vw,56px);font-weight:800;line-height:1.14;margin-bottom:20px;color:var(--navy)}
-.orange{color:var(--orange)}
-.teal{color:var(--teal)}
-.hero-desc{font-size:15px;color:var(--gray);line-height:1.78;max-width:430px;margin-bottom:32px;font-weight:300}
-.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:40px}
-.btn-p{background:var(--teal);color:var(--white);padding:13px 28px;font-family:var(--ff-d);font-weight:700;font-size:11px;letter-spacing:1px;text-transform:uppercase;text-decoration:none;border-radius:2px;transition:all .2s;display:inline-block}
-.btn-p:hover{background:var(--navy);transform:translateY(-2px);box-shadow:0 8px 24px rgba(13,33,55,0.14)}
-.btn-g{border:2px solid var(--navy);color:var(--navy);padding:11px 24px;font-family:var(--ff-d);font-weight:700;font-size:11px;letter-spacing:1px;text-transform:uppercase;text-decoration:none;border-radius:2px;transition:all .2s;display:inline-block}
-.btn-g:hover{background:var(--navy);color:var(--white)}
-.hero-stats{display:flex;gap:36px;padding-top:28px;border-top:1px solid var(--bd)}
-.hs-num{font-family:var(--ff-d);font-size:32px;font-weight:800;color:var(--navy);line-height:1}
-.hs-num span{color:var(--teal)}
-.hs-lbl{font-size:10.5px;color:var(--gray-l);margin-top:4px;line-height:1.4}
-
-/* Hero visual */
-.hero-visual{position:relative;z-index:1;display:flex;align-items:center;justify-content:center}
-.hero-photo-wrap{position:relative;width:100%;max-width:400px;display:flex;flex-direction:column;align-items:center;justify-content:center}
-.hero-photo-bg{position:absolute;width:84%;height:84%;background:radial-gradient(circle,rgba(55,174,178,0.13) 0%,rgba(55,174,178,0.04) 70%,transparent 100%);border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%);z-index:0}
-.hero-photo{position:relative;z-index:1;width:82%;display:block;border-radius:50%;margin:0 auto;box-shadow:0 0 0 5px #fff,0 0 0 9px #37AEB2,0 0 0 13px rgba(55,174,178,0.18),0 28px 64px rgba(13,33,55,0.16)}
-.hero-badge{position:absolute;bottom:16px;left:-12px;z-index:2;background:var(--navy);color:var(--white);padding:12px 16px;border-radius:3px;box-shadow:0 8px 24px rgba(13,33,55,0.2);border-left:4px solid var(--teal);max-width:230px}
-.hb-role{font-family:var(--ff-m);font-size:8px;color:var(--teal);letter-spacing:1.8px;text-transform:uppercase;margin-bottom:3px;line-height:1.5}
-.hb-name{font-family:var(--ff-d);font-size:13px;font-weight:700;color:var(--white)}
-.hero-cert{position:absolute;top:14px;right:-14px;z-index:2;background:var(--orange);color:var(--white);padding:10px 14px;border-radius:2px;font-family:var(--ff-d);font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:1px;box-shadow:0 8px 20px rgba(249,104,25,0.28);text-align:center;line-height:1.6}
-
-/* ── MARQUEE ── */
-.mq-wrap{overflow:hidden;border-top:1px solid var(--bd);border-bottom:1px solid var(--bd);background:var(--off);padding:13px 0;white-space:nowrap}
-.mq{display:inline-flex;gap:0;animation:mq 42s linear infinite;width:max-content;will-change:transform}
-.mq-item{font-family:var(--ff-m);font-size:9.5px;color:var(--gray-l);letter-spacing:2px;text-transform:uppercase;padding:0 26px;display:inline-flex;align-items:center;gap:10px;white-space:nowrap;flex-shrink:0}
-.mq-dot{width:4px;height:4px;border-radius:50%;background:var(--teal);flex-shrink:0;display:inline-block}
-@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-
-/* ── EVALUADOR / PRODUCTO GANCHO ── */
-.eval-sec{background:var(--navy);position:relative;overflow:hidden}
-.eval-sec::after{content:'QA';position:absolute;right:-20px;bottom:-90px;font-family:var(--ff-d);font-size:280px;font-weight:800;color:rgba(255,255,255,.025);line-height:1;pointer-events:none}
-.eval-wrap{max-width:1100px;margin:0 auto;padding:72px 52px;display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center;position:relative;z-index:1}
-.eval-label{font-family:var(--ff-m);font-size:9px;color:var(--teal);letter-spacing:2.5px;text-transform:uppercase;margin-bottom:13px}
-.eval-copy h2{font-family:var(--ff-d);font-size:clamp(28px,3.2vw,44px);line-height:1.15;color:var(--white);margin-bottom:14px}
-.eval-copy h2 span{color:var(--teal)}
-.eval-copy p{font-size:14px;color:rgba(255,255,255,.58);line-height:1.75;font-weight:300;max-width:590px;margin-bottom:24px}
-.eval-actions{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
-.eval-note{font-family:var(--ff-m);font-size:8.5px;color:rgba(255,255,255,.35);letter-spacing:.5px}
-.eval-card{border:1px solid rgba(255,255,255,.12);border-top:3px solid var(--orange);padding:26px;background:rgba(255,255,255,.045)}
-.eval-card-title{font-family:var(--ff-d);font-size:17px;font-weight:800;color:var(--white);margin-bottom:13px}
-.eval-list{list-style:none;display:grid;gap:10px}
-.eval-list li{font-size:12px;color:rgba(255,255,255,.62);display:flex;gap:9px;align-items:flex-start}
-.eval-list li::before{content:'✓';color:var(--teal);font-weight:700}
-.eval-upgrade{border-top:1px solid rgba(255,255,255,.1);margin-top:18px;padding-top:16px;font-size:11px;color:rgba(255,255,255,.44);line-height:1.65}
-.eval-upgrade strong{color:var(--orange);font-weight:600}
-
-/* ── SECTION BASE ── */
-.sec-in{max-width:1100px;margin:0 auto;padding:80px 52px}
-.sec-lbl{font-family:var(--ff-m);font-size:9.5px;color:var(--teal);letter-spacing:3px;text-transform:uppercase;display:flex;align-items:center;gap:10px;margin-bottom:10px}
-.sec-lbl::before{content:'';width:18px;height:2px;background:var(--teal)}
-.sec-title{font-family:var(--ff-d);font-size:clamp(26px,3vw,42px);font-weight:800;line-height:1.2;margin-bottom:12px;color:var(--navy)}
-.sec-sub{font-size:14.5px;color:var(--gray);line-height:1.7;max-width:520px;font-weight:300}
-
-/* ── PROBLEMA ── */
-.prb-grid{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:start;margin-top:52px}
-.prb-callout{border-left:3px solid var(--orange);background:rgba(249,104,25,0.04);padding:18px 20px;margin-top:24px}
-.prb-callout p{font-size:13.5px;color:var(--navy);line-height:1.75;font-style:italic;font-family:var(--ff-d);font-weight:600}
-.compare{border:1px solid var(--bd);overflow:hidden}
-.compare-hd{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--bd)}
-.ch-bad{padding:10px 16px;background:rgba(249,104,25,0.07);font-family:var(--ff-m);font-size:8.5px;color:var(--orange);letter-spacing:1.5px;text-transform:uppercase;text-align:center;border-bottom:2px solid var(--orange)}
-.ch-good{padding:10px 16px;background:var(--teal-pale);font-family:var(--ff-m);font-size:8.5px;color:var(--teal);letter-spacing:1.5px;text-transform:uppercase;text-align:center;border-bottom:2px solid var(--teal)}
-.compare-row{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--bd)}
-.cr-bad{padding:12px 16px;background:rgba(249,104,25,0.02);font-size:12.5px;color:var(--gray)}
-.cr-good{padding:12px 16px;background:rgba(55,174,178,0.03);font-size:12.5px;color:var(--gray)}
-.cr-bad::before{content:'✗  ';color:rgba(249,104,25,0.5)}
-.cr-good::before{content:'✓  ';color:var(--teal)}
-
-/* ── ARTICULOS ── */
-.art-sec{background:var(--off)}
-.art-grid{display:grid;grid-template-columns:2fr 1fr;gap:20px;margin-top:48px}
-.art-featured{border:1px solid var(--bd);border-top:3px solid var(--orange);background:var(--white);padding:36px 32px;transition:box-shadow .25s;cursor:pointer}
-.art-featured:hover{box-shadow:0 14px 40px rgba(13,33,55,0.08)}
-.art-eyebrow{font-family:var(--ff-m);font-size:8.5px;color:var(--orange);letter-spacing:2px;text-transform:uppercase;margin-bottom:14px}
-.art-featured h3{font-family:var(--ff-d);font-size:21px;font-weight:800;color:var(--navy);line-height:1.28;margin-bottom:14px}
-.art-featured p{font-size:13px;color:var(--gray);line-height:1.75;font-weight:300;margin-bottom:20px}
-.art-meta{font-family:var(--ff-m);font-size:9px;color:var(--gray-l);letter-spacing:1px;display:flex;gap:16px;align-items:center}
-.art-link{color:var(--teal);text-decoration:none;border-bottom:1px solid rgba(55,174,178,0.3)}
-.art-side{display:flex;flex-direction:column;gap:16px}
-.art-card{border:1px solid var(--bd);border-top:3px solid var(--teal);background:var(--white);padding:22px 20px;cursor:pointer;transition:box-shadow .2s}
-.art-card:hover{box-shadow:0 8px 24px rgba(13,33,55,0.07)}
-.art-card-tag{font-family:var(--ff-m);font-size:8px;color:var(--teal);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:9px}
-.art-card h4{font-family:var(--ff-d);font-size:13.5px;font-weight:700;color:var(--navy);line-height:1.3;margin-bottom:6px}
-.art-card p{font-size:11.5px;color:var(--gray);line-height:1.6;font-weight:300}
-
-/* ── MANUALES ── */
-.mnl-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:48px}
-.mnl-card{border:1px solid var(--bd);border-top:3px solid var(--teal);background:var(--white);padding:28px 24px}
-.mnl-card.or{border-top-color:var(--orange)}
-.mnl-etapa{font-family:var(--ff-m);font-size:8.5px;color:var(--teal);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px}
-.mnl-card.or .mnl-etapa{color:var(--orange)}
-.mnl-icon{font-size:26px;margin-bottom:14px;display:block}
-.mnl-name{font-family:var(--ff-d);font-size:16.5px;font-weight:800;color:var(--navy);margin-bottom:10px;line-height:1.3}
-.mnl-desc{font-size:12px;color:var(--gray);line-height:1.72;font-weight:300;margin-bottom:16px}
-.mnl-pills{display:flex;gap:8px;flex-wrap:wrap}
-.mnl-pill{font-family:var(--ff-m);font-size:8px;color:var(--gray-l);border:1px solid var(--bd);padding:3px 8px}
-.mnl-bundle{margin-top:20px;border:1px solid var(--bd);border-top:3px solid var(--orange);background:linear-gradient(135deg,rgba(249,104,25,0.04) 0%,var(--white) 60%);padding:28px 32px;display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap}
-.mnl-bundle-left h3{font-family:var(--ff-d);font-size:20px;font-weight:800;color:var(--navy);margin-bottom:6px}
-.mnl-bundle-left p{font-size:12.5px;color:var(--gray);font-weight:300}
-.mnl-bundle-badge{font-family:var(--ff-m);font-size:8.5px;color:var(--orange);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px}
-.mnl-price-wrap{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
-.mnl-old{font-family:var(--ff-d);font-size:14px;color:var(--gray-l);text-decoration:line-through}
-.mnl-new{font-family:var(--ff-d);font-size:44px;font-weight:800;color:var(--teal);line-height:1}
-.mnl-pay{font-family:var(--ff-m);font-size:9px;color:var(--gray-l);margin-top:8px;letter-spacing:.5px}
-
-/* ── SERVICIOS ── */
-.srv-sec{background:var(--off)}
-.srv-s0{display:grid;grid-template-columns:1fr auto;gap:28px;align-items:center;border:1px solid var(--bd);border-top:3px solid var(--teal);background:var(--teal-pale);padding:28px 32px;margin-top:48px;margin-bottom:20px}
-.srv-s0-badge{font-family:var(--ff-m);font-size:8.5px;color:var(--teal);letter-spacing:2.5px;text-transform:uppercase;border:1px solid rgba(55,174,178,0.35);padding:4px 10px;display:inline-block;margin-bottom:10px}
-.srv-s0-name{font-family:var(--ff-d);font-size:20px;font-weight:800;color:var(--navy);margin-bottom:8px}
-.srv-s0-desc{font-size:12.5px;color:var(--gray);line-height:1.72;font-weight:300;max-width:520px}
-.srv-s0-right{display:flex;flex-direction:column;align-items:flex-end;gap:12px;min-width:180px}
-.srv-s0-note{font-family:var(--ff-m);font-size:8.5px;color:var(--gray-l);letter-spacing:.8px;text-align:right;line-height:1.5}
-.srv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.srv-card{padding:28px 24px;border:1px solid var(--bd);border-top:3px solid transparent;background:var(--white);transition:all .25s;position:relative}
-.srv-card:hover{border-top-color:var(--teal);box-shadow:0 12px 36px rgba(13,33,55,0.07);transform:translateY(-3px)}
-.srv-card.or:hover{border-top-color:var(--orange)}
-.srv-card.ai{border-top:3px solid #7c3aed;background:linear-gradient(135deg,rgba(124,58,237,0.03) 0%,var(--white) 60%)}
-.srv-card.ai:hover{border-top-color:#7c3aed !important;box-shadow:0 12px 36px rgba(124,58,237,0.1);transform:translateY(-3px)}
-.srv-num{font-family:var(--ff-m);font-size:9px;color:var(--teal);opacity:.45;letter-spacing:2px;margin-bottom:14px}
-.srv-icon{width:40px;height:40px;display:flex;align-items:center;justify-content:center;font-size:17px;margin-bottom:14px;border:1px solid rgba(55,174,178,0.2);background:var(--teal-pale);border-radius:2px}
-.srv-name{font-family:var(--ff-d);font-size:17px;font-weight:800;color:var(--navy);margin-bottom:8px;line-height:1.3}
-.srv-desc{font-size:12px;color:var(--gray);line-height:1.72;margin-bottom:18px;font-weight:300}
-.tags{display:flex;flex-wrap:wrap;gap:5px}
-.tag{font-family:var(--ff-m);font-size:8px;color:var(--teal);border:1px solid rgba(55,174,178,0.3);padding:3px 7px;background:var(--teal-pale)}
-.tag-ai{color:#7c3aed !important;border-color:rgba(124,58,237,0.3) !important;background:rgba(124,58,237,0.06) !important}
-.tag-or{color:var(--orange) !important;border-color:rgba(249,104,25,0.3) !important;background:rgba(249,104,25,0.05) !important}
-
-/* ── SOBRE MÍ ── */
-.about-sec{background:var(--white)}
-.about-grid{display:grid;grid-template-columns:300px 1fr;gap:64px;align-items:start;margin-top:48px}
-.about-photo-col{display:flex;flex-direction:column;align-items:center;gap:16px}
-.about-photo{width:220px;height:220px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 5px #fff,0 0 0 9px #37AEB2,0 0 0 14px rgba(55,174,178,0.16),0 20px 48px rgba(13,33,55,0.14)}
-.about-name{font-family:var(--ff-d);font-size:15px;font-weight:800;color:var(--navy);text-align:center}
-.about-role{font-family:var(--ff-m);font-size:8.5px;color:var(--teal);letter-spacing:2px;text-transform:uppercase;text-align:center;margin-top:3px;line-height:1.5}
-.about-text h3{font-family:var(--ff-d);font-size:26px;font-weight:800;color:var(--navy);margin-bottom:16px;line-height:1.25}
-.about-text p{font-size:14px;color:var(--gray);line-height:1.85;margin-bottom:13px;font-weight:300}
-.about-text strong{color:var(--navy);font-weight:600}
-.creds-row{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:24px}
-.cred{padding:11px 14px;border:1px solid var(--bd);background:var(--off);border-left:3px solid var(--teal)}
-.cred.or{border-left-color:var(--orange)}
-.cred-t{font-family:var(--ff-d);font-size:11px;font-weight:700;color:var(--navy)}
-.cred-o{font-size:9px;color:var(--gray-l);margin-top:1px;font-family:var(--ff-m)}
-
-/* ── IMPACTO (stats) ── */
-.impact-sec{background:var(--navy)}
-.impact-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,0.05);margin-top:48px}
-.imp-cell{background:var(--navy);padding:36px 20px;text-align:center;transition:background .3s}
-.imp-cell:hover{background:rgba(255,255,255,0.03)}
-.imp-num{font-family:var(--ff-d);font-size:48px;font-weight:800;color:var(--teal);line-height:1;letter-spacing:-1px}
-.imp-unit{font-size:24px;color:var(--orange)}
-.imp-lbl{font-size:10.5px;color:rgba(255,255,255,0.38);margin-top:10px;line-height:1.6;max-width:130px;margin-left:auto;margin-right:auto}
-
-/* ── CONTACTO ── */
-.cta-sec{background:var(--navy);position:relative;overflow:hidden}
-.cta-sec::before{content:'';position:absolute;top:-200px;left:-200px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(55,174,178,0.1) 0%,transparent 70%);pointer-events:none}
-.cta-in{max-width:700px;margin:0 auto;padding:100px 52px;text-align:center;position:relative;z-index:1}
-.cta-in h2{font-family:var(--ff-d);font-size:clamp(28px,3.5vw,46px);font-weight:800;color:var(--white);line-height:1.2;margin-bottom:16px}
-.cta-in h2 em{color:var(--teal);font-style:italic}
-.cta-in p{font-size:14.5px;color:rgba(255,255,255,0.55);line-height:1.75;margin-bottom:36px;font-weight:300}
-.cta-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:36px}
-.btn-wh{border:2px solid rgba(255,255,255,0.25);color:rgba(255,255,255,0.8);padding:12px 26px;font-family:var(--ff-d);font-weight:700;font-size:11px;letter-spacing:1px;text-transform:uppercase;text-decoration:none;border-radius:2px;transition:all .2s;display:inline-block}
-.btn-wh:hover{border-color:var(--teal);color:var(--teal)}
-.cta-links{display:flex;gap:24px;justify-content:center;flex-wrap:wrap}
-.cta-link{font-family:var(--ff-m);font-size:9.5px;color:rgba(255,255,255,0.35);text-decoration:none;letter-spacing:1px;transition:color .2s}
-.cta-link:hover{color:var(--teal)}
-
-/* ── FOOTER ── */
-footer{background:var(--navy);border-top:1px solid rgba(255,255,255,0.06);padding:24px 52px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
-.foot-logo{height:28px;width:auto;opacity:.6}
-.foot-txt{font-family:var(--ff-m);font-size:9px;color:rgba(255,255,255,0.25);letter-spacing:1px}
-.foot-r{font-family:var(--ff-m);font-size:9px;color:rgba(255,255,255,0.2);letter-spacing:.5px}
-
-/* ── REVEAL ── */
-.rv{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
-.rv.on{opacity:1;transform:translateY(0)}
-
-/* ── RESPONSIVE ── */
-@media(max-width:900px){
-  nav{padding:0 20px}
-  .nav-links{display:none}
-  .hero{grid-template-columns:1fr;padding:80px 24px 48px}
-  .hero-visual{display:none}
-  .sec-in{padding:60px 24px}
-  .prb-grid,.art-grid,.about-grid{grid-template-columns:1fr}
-  .eval-wrap{grid-template-columns:1fr;padding:60px 24px}
-  .mnl-grid,.srv-grid,.creds-row,.impact-grid{grid-template-columns:1fr}
-  .srv-s0{grid-template-columns:1fr}
-  .srv-s0-right{align-items:flex-start}
-  .mnl-bundle{flex-direction:column}
-  footer{padding:20px 24px;flex-direction:column;align-items:flex-start}
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Atenas Quintana | Estrategia QA, AI Testing y formación LATAM</title>
+  <meta name="description" content="Consultoría, formación y herramientas de calidad de software para profesionales y empresas. Evalúa gratis tus casos de prueba y evoluciona con QA Intelligent.">
+  <meta name="robots" content="index,follow">
+  <meta name="theme-color" content="#0d2137">
+  <link rel="canonical" href="https://aitesting.lat/">
+  <meta property="og:title" content="Atenas Quintana | Calidad de software inteligente">
+  <meta property="og:description" content="Estrategia QA, diseño reutilizable, automatización, formación y herramientas gratuitas para LATAM.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://aitesting.lat/">
+  <meta property="og:image" content="https://aitesting.lat/assets/atenas-quintana.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Jost:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {"@type":"WebSite","@id":"https://aitesting.lat/#website","url":"https://aitesting.lat/","name":"AI Testing","inLanguage":"es"},
+      {"@type":"Person","@id":"https://aitesting.lat/#atenas","name":"Atenas Quintana Blas","jobTitle":"QA Automation & Performance Lead","url":"https://aitesting.lat/","sameAs":["https://www.linkedin.com/in/atenas-quintana"]},
+      {"@type":"ProfessionalService","@id":"https://aitesting.lat/#service","name":"AI Testing Training & Services","url":"https://aitesting.lat/","founder":{"@id":"https://aitesting.lat/#atenas"},"areaServed":"Latin America","serviceType":["Estrategia QA","Diseño de casos de prueba","Automatización","Performance Testing","Formación QA"]},
+      {"@type":"FAQPage","mainEntity":[
+        {"@type":"Question","name":"¿El evaluador gratuito reemplaza una revisión profesional?","acceptedAnswer":{"@type":"Answer","text":"No. Entrega una orientación inicial y genérica. QA Intelligent incorpora contexto, riesgo, repositorio, reutilización y proyección de automatización."}},
+        {"@type":"Question","name":"¿Trabajas con profesionales y con empresas?","acceptedAnswer":{"@type":"Answer","text":"Sí. Hay formación y mentoría para perfiles QA, además de diagnóstico, estrategia, diseño, automatización y acompañamiento para equipos."}},
+        {"@type":"Question","name":"¿Los servicios son solo para Perú?","acceptedAnswer":{"@type":"Answer","text":"No. AI Testing trabaja con profesionales y organizaciones de Latinoamérica de forma remota."}}
+      ]}
+    ]
+  }
+  </script>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--navy:#0d2137;--navy-2:#173b5f;--teal:#37aeb2;--teal-dark:#258f94;--teal-pale:#eaf7f8;--orange:#f96819;--orange-pale:#fff2ea;--ink:#20364a;--gray:#5d6d7c;--muted:#91a1ae;--off:#f6f9fb;--white:#fff;--line:rgba(13,33,55,.11);--shadow:0 18px 48px rgba(13,33,55,.08);--display:'Playfair Display',Georgia,serif;--body:'Jost',Arial,sans-serif;--mono:'DM Mono',monospace}
+    html{scroll-behavior:smooth;scroll-padding-top:82px}
+    body{font-family:var(--body);color:var(--navy);background:var(--white);overflow-x:hidden}
+    a{color:inherit}
+    img{max-width:100%;display:block}
+    button{font:inherit}
+    .container{width:min(1160px,calc(100% - 48px));margin-inline:auto}
+    .topbar{background:var(--navy);color:rgba(255,255,255,.66);padding:8px 20px;text-align:center;font:9px var(--mono);letter-spacing:1.4px;text-transform:uppercase}
+    .nav{height:70px;background:rgba(255,255,255,.97);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:50;backdrop-filter:blur(14px)}
+    .nav-in{height:100%;display:flex;align-items:center;justify-content:space-between;gap:24px}
+    .brand{text-decoration:none;display:flex;align-items:center;gap:10px;white-space:nowrap}.brand-mark{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--navy);color:var(--teal);font:800 12px var(--display);border:2px solid var(--teal)}.brand-copy{font:800 18px var(--display)}.brand-copy span{color:var(--teal)}
+    .nav-links{display:flex;align-items:center;gap:22px;list-style:none}.nav-links a{text-decoration:none;color:var(--gray);font:500 9px var(--mono);letter-spacing:.9px;text-transform:uppercase;transition:color .2s}.nav-links a:hover{color:var(--teal)}
+    .nav-links .nav-button{background:var(--navy);color:white;padding:10px 15px}.nav-links .nav-button:hover{background:var(--teal);color:white}
+    .menu-button{display:none;border:0;background:transparent;width:40px;height:40px;cursor:pointer}.menu-button span{display:block;width:24px;height:2px;background:var(--navy);margin:5px auto}
+    .hero{min-height:calc(100vh - 102px);display:flex;align-items:center;position:relative;overflow:hidden;background:linear-gradient(112deg,#fff 0%,#fff 62%,var(--teal-pale) 62%,var(--teal-pale) 100%)}
+    .hero::before{content:'';position:absolute;width:530px;height:530px;border-radius:50%;right:-240px;top:-230px;background:radial-gradient(circle,rgba(55,174,178,.2),transparent 70%)}
+    .hero-in{display:grid;grid-template-columns:1.12fr .88fr;gap:74px;align-items:center;padding-block:76px;position:relative}
+    .eyebrow{font:500 9px var(--mono);color:var(--teal-dark);letter-spacing:2.3px;text-transform:uppercase;margin-bottom:17px;display:flex;align-items:center;gap:10px}.eyebrow::before{content:'';width:22px;height:2px;background:currentColor}
+    .hero h1{font:800 clamp(40px,5.4vw,70px)/1.04 var(--display);letter-spacing:-1.7px;margin-bottom:22px;max-width:720px}.hero h1 em{color:var(--teal);font-style:italic}.hero h1 .orange{color:var(--orange)}
+    .hero-lead{font-size:16px;color:var(--gray);line-height:1.8;font-weight:300;max-width:610px;margin-bottom:30px}.hero-lead strong{color:var(--navy);font-weight:600}
+    .actions{display:flex;gap:12px;flex-wrap:wrap}.button{display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;padding:13px 23px;border:2px solid transparent;font:700 11px var(--display);letter-spacing:.7px;text-transform:uppercase;transition:.2s}.button-primary{background:var(--teal);color:white}.button-primary:hover{background:var(--navy);transform:translateY(-2px)}.button-outline{border-color:var(--navy);color:var(--navy)}.button-outline:hover{background:var(--navy);color:white}.button-orange{background:var(--orange);color:white}.button-orange:hover{background:var(--teal)}.button-light{border-color:rgba(255,255,255,.25);color:white}.button-light:hover{border-color:var(--teal);color:var(--teal)}
+    .hero-proof{display:flex;flex-wrap:wrap;gap:9px;margin-top:34px;padding-top:25px;border-top:1px solid var(--line)}.proof{font:8px var(--mono);letter-spacing:.7px;color:var(--gray);padding:6px 9px;background:var(--off);border:1px solid var(--line)}
+    .portrait-area{position:relative;display:flex;justify-content:center}.portrait-frame{width:min(390px,90%);position:relative;padding:22px 22px 0}.portrait-bg{position:absolute;inset:0 0 36px;background:var(--navy);border-radius:48% 48% 3px 3px}.portrait{position:relative;z-index:1;width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:48% 48% 3px 3px;filter:saturate(.95)}
+    .float-card{position:absolute;z-index:3;background:white;box-shadow:var(--shadow);padding:13px 15px;border-left:3px solid var(--teal)}.float-card strong{font:800 19px var(--display);display:block}.float-card span{font-size:9px;color:var(--gray)}.float-one{left:-24px;bottom:62px}.float-two{right:-17px;top:52px;border-left-color:var(--orange)}
+    .portrait-caption{position:relative;z-index:2;background:var(--navy);color:white;padding:14px 18px;border-top:3px solid var(--teal)}.portrait-caption strong{font:700 14px var(--display);display:block}.portrait-caption span{font:8px var(--mono);color:rgba(255,255,255,.5);letter-spacing:1.2px;text-transform:uppercase}
+    .expertise{background:var(--navy);overflow:hidden}.expertise-track{display:flex;justify-content:center;flex-wrap:wrap}.expertise-item{padding:17px 25px;color:rgba(255,255,255,.48);font:9px var(--mono);letter-spacing:1.5px;text-transform:uppercase}.expertise-item::before{content:'•';color:var(--teal);margin-right:18px}
+    .section{padding:94px 0}.section-off{background:var(--off)}.section-dark{background:var(--navy);color:white}.section-head{display:grid;grid-template-columns:1fr .75fr;gap:50px;align-items:end;margin-bottom:48px}.section-head h2{font:800 clamp(30px,4vw,48px)/1.12 var(--display);letter-spacing:-.5px}.section-head h2 em{color:var(--teal);font-style:italic}.section-head p{font-size:14px;color:var(--gray);line-height:1.78;font-weight:300}.section-dark .section-head p{color:rgba(255,255,255,.55)}
+    .audience-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.audience-card{border:1px solid var(--line);padding:32px;background:white;display:grid;grid-template-columns:auto 1fr;gap:20px;transition:.25s}.audience-card:hover{box-shadow:var(--shadow);transform:translateY(-3px)}.audience-icon{width:52px;height:52px;display:grid;place-items:center;background:var(--teal-pale);font-size:23px}.audience-card:nth-child(2) .audience-icon{background:var(--orange-pale)}.audience-card h3{font:800 20px var(--display);margin-bottom:8px}.audience-card p{font-size:13px;color:var(--gray);line-height:1.7;font-weight:300;margin-bottom:13px}.text-link{font:500 9px var(--mono);text-transform:uppercase;letter-spacing:.8px;text-decoration:none;color:var(--teal-dark);border-bottom:1px solid rgba(55,174,178,.3);padding-bottom:2px}
+    .featured-service{background:var(--navy);color:white;padding:38px;display:grid;grid-template-columns:1.05fr .95fr;gap:46px;align-items:center;margin-bottom:20px;position:relative;overflow:hidden}.featured-service::after{content:'QA+';position:absolute;right:-18px;bottom:-65px;font:800 170px var(--display);color:rgba(255,255,255,.025)}.feature-badge{display:inline-block;font:500 8px var(--mono);letter-spacing:1.5px;text-transform:uppercase;color:var(--orange);border:1px solid rgba(249,104,25,.4);padding:5px 8px;margin-bottom:14px}.featured-service h3{font:800 29px var(--display);margin-bottom:12px}.featured-service p{font-size:13px;line-height:1.75;color:rgba(255,255,255,.6);font-weight:300;margin-bottom:22px}.pipeline{display:grid;gap:8px;position:relative;z-index:1}.pipe{background:rgba(255,255,255,.06);border-left:3px solid var(--teal);padding:11px 13px;display:flex;align-items:center;gap:12px}.pipe-num{font:500 8px var(--mono);color:var(--teal)}.pipe strong{font-size:12px}.pipe span{font-size:10px;color:rgba(255,255,255,.42);margin-left:auto}
+    .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.service{background:white;border:1px solid var(--line);border-top:3px solid var(--teal);padding:27px 23px;transition:.25s}.service:nth-child(2n){border-top-color:var(--orange)}.service:hover{box-shadow:var(--shadow);transform:translateY(-3px)}.service-num{font:500 8px var(--mono);color:var(--muted);letter-spacing:1.4px}.service-icon{font-size:23px;margin:16px 0 11px}.service h3{font:800 17px var(--display);margin-bottom:8px}.service p{font-size:12px;color:var(--gray);line-height:1.7;font-weight:300;margin-bottom:16px}.tags{display:flex;gap:6px;flex-wrap:wrap}.tag{font:8px var(--mono);padding:4px 7px;background:var(--teal-pale);color:var(--teal-dark);border:1px solid rgba(55,174,178,.22)}
+    .tool-layout{display:grid;grid-template-columns:1fr .9fr;gap:58px;align-items:center}.tool-title{font:800 clamp(32px,4vw,50px)/1.1 var(--display);margin-bottom:16px}.tool-title em{color:var(--teal);font-style:italic}.tool-text{font-size:14px;line-height:1.8;color:rgba(255,255,255,.58);font-weight:300;margin-bottom:25px}.tool-meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}.tool-meta span{font:8px var(--mono);padding:6px 8px;border:1px solid rgba(255,255,255,.13);color:rgba(255,255,255,.5)}
+    .score-demo{background:white;color:var(--navy);padding:27px;box-shadow:0 24px 70px rgba(0,0,0,.2);position:relative}.score-demo::before{content:'VISTA PREVIA';position:absolute;right:18px;top:16px;font:7px var(--mono);color:var(--muted);letter-spacing:1px}.score-top{display:flex;align-items:center;gap:18px;padding-bottom:18px;border-bottom:1px solid var(--line)}.score-circle{width:84px;height:84px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--teal) 78%,#e9eff2 0);position:relative}.score-circle::after{content:'';position:absolute;inset:8px;background:white;border-radius:50%}.score-circle strong{position:relative;z-index:1;font:800 25px var(--display)}.score-top h3{font:800 18px var(--display)}.score-top p{font-size:10px;color:var(--gray);margin-top:4px}.demo-bars{display:grid;gap:11px;margin-top:18px}.demo-row{display:grid;grid-template-columns:120px 1fr 26px;align-items:center;gap:10px;font-size:9px;color:var(--gray)}.demo-bar{height:5px;background:#e8eef1}.demo-bar span{height:100%;display:block;background:var(--teal)}.demo-row:nth-child(3) .demo-bar span{background:var(--orange)}.w90{width:90%}.w82{width:82%}.w58{width:58%}.w76{width:76%}
+    .results-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}.result-stat{background:white;padding:33px 20px;text-align:center}.result-stat strong{font:800 42px var(--display);color:var(--teal)}.result-stat strong span{color:var(--orange);font-size:23px}.result-stat p{font-size:10px;color:var(--gray);line-height:1.5;margin:7px auto 0;max-width:150px}.process{display:grid;grid-template-columns:repeat(4,1fr);margin-top:42px}.process-step{padding:20px 24px;border-left:1px solid var(--line)}.process-step:first-child{border-left:3px solid var(--teal)}.process-step span{font:500 8px var(--mono);color:var(--teal);letter-spacing:1px}.process-step h3{font:700 15px var(--display);margin:9px 0 6px}.process-step p{font-size:11px;color:var(--gray);line-height:1.6}
+    .training-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.course{background:white;border:1px solid var(--line);overflow:hidden;transition:.25s}.course:hover{box-shadow:var(--shadow);transform:translateY(-3px)}.course-top{min-height:122px;padding:22px;background:var(--navy);color:white;position:relative}.course:nth-child(2) .course-top{background:var(--teal-dark)}.course:nth-child(3) .course-top{background:var(--orange)}.course-level{font:500 8px var(--mono);letter-spacing:1.2px;text-transform:uppercase;color:rgba(255,255,255,.55)}.course h3{font:800 19px/1.25 var(--display);margin-top:21px}.course-body{padding:21px}.course-body p{font-size:12px;color:var(--gray);line-height:1.7;font-weight:300;margin-bottom:16px}.course-info{display:flex;justify-content:space-between;gap:10px;font:8px var(--mono);color:var(--muted);border-top:1px solid var(--line);padding-top:12px}
+    .resource-layout{display:grid;grid-template-columns:1fr 1fr;gap:22px}.resource-feature{background:var(--orange-pale);border:1px solid rgba(249,104,25,.18);padding:32px}.resource-feature .eyebrow{color:var(--orange)}.resource-feature h3{font:800 27px var(--display);margin-bottom:11px}.resource-feature p{font-size:13px;color:var(--gray);line-height:1.75;font-weight:300;margin-bottom:21px}.resource-list{display:grid;gap:10px}.resource-item{background:white;border:1px solid var(--line);padding:18px 20px;display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center}.resource-number{font:500 8px var(--mono);color:var(--teal)}.resource-item h3{font:700 14px var(--display);margin-bottom:3px}.resource-item p{font-size:10px;color:var(--gray)}.resource-item span:last-child{font-size:18px;color:var(--teal)}
+    .about-layout{display:grid;grid-template-columns:.78fr 1.22fr;gap:70px;align-items:center}.about-image{position:relative;padding:0 26px 28px 0}.about-image::before{content:'';position:absolute;inset:28px 0 0 28px;border:2px solid var(--teal)}.about-image img{position:relative;z-index:1;width:100%;aspect-ratio:1/1;object-fit:cover;background:var(--teal-pale)}.about-copy h2{font:800 clamp(31px,4vw,47px)/1.12 var(--display);margin-bottom:17px}.about-copy h2 em{color:var(--teal);font-style:italic}.about-copy p{font-size:14px;color:var(--gray);line-height:1.82;font-weight:300;margin-bottom:12px}.about-copy p strong{color:var(--navy);font-weight:600}.credentials{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:23px}.credential{border-left:3px solid var(--teal);background:var(--off);padding:10px 12px}.credential:nth-child(2n){border-left-color:var(--orange)}.credential strong{font:700 10px var(--display);display:block}.credential span{font:7px var(--mono);color:var(--muted)}
+    .faq{max-width:880px;margin:0 auto}.faq details{background:white;border:1px solid var(--line);margin-bottom:9px}.faq summary{list-style:none;cursor:pointer;padding:18px 54px 18px 20px;font:700 14px var(--display);position:relative}.faq summary::-webkit-details-marker{display:none}.faq summary::after{content:'+';position:absolute;right:20px;top:50%;transform:translateY(-50%);font:400 22px var(--body);color:var(--teal)}.faq details[open] summary::after{content:'−'}.faq p{padding:0 20px 19px;font-size:12px;color:var(--gray);line-height:1.75;max-width:780px}
+    .contact{background:var(--navy);color:white;position:relative;overflow:hidden}.contact::after{content:'';position:absolute;width:520px;height:520px;border-radius:50%;left:-280px;bottom:-330px;background:radial-gradient(circle,rgba(55,174,178,.16),transparent 70%)}.contact-in{padding:92px 0;text-align:center;position:relative;z-index:1;max-width:790px;margin:auto}.contact-in .eyebrow{justify-content:center;color:var(--teal)}.contact-in h2{font:800 clamp(32px,4.5vw,54px)/1.1 var(--display);margin-bottom:17px}.contact-in h2 em{color:var(--teal);font-style:italic}.contact-in p{font-size:14px;color:rgba(255,255,255,.56);line-height:1.75;max-width:650px;margin:0 auto 28px}.contact-links{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}.contact-meta{display:flex;justify-content:center;gap:25px;flex-wrap:wrap;margin-top:30px;font:8px var(--mono);color:rgba(255,255,255,.34);letter-spacing:.7px}
+    footer{background:#081827;color:rgba(255,255,255,.32);padding:25px 0}.footer-in{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;font:8px var(--mono);letter-spacing:.6px}.footer-brand{font:700 13px var(--display);color:white}.footer-brand span{color:var(--teal)}.footer-links{display:flex;gap:18px}.footer-links a{text-decoration:none}.footer-links a:hover{color:var(--teal)}
+    @media(max-width:980px){.nav-links{display:none;position:absolute;top:70px;left:0;right:0;background:white;padding:20px 24px;border-bottom:1px solid var(--line);box-shadow:var(--shadow);flex-direction:column;align-items:flex-start}.nav-links.open{display:flex}.menu-button{display:block}.hero{background:linear-gradient(180deg,#fff 0%,#fff 68%,var(--teal-pale) 68%)}.hero-in,.section-head,.featured-service,.tool-layout,.about-layout{grid-template-columns:1fr}.hero-in{gap:48px}.portrait-area{max-width:500px;margin:auto}.services-grid,.training-grid{grid-template-columns:repeat(2,1fr)}.results-grid,.process{grid-template-columns:repeat(2,1fr)}.process-step:nth-child(3){border-left:3px solid var(--teal)}.resource-layout{grid-template-columns:1fr}.section-head{gap:15px}.section-head p{max-width:650px}}
+    @media(max-width:640px){.container{width:min(100% - 32px,1160px)}.topbar{font-size:7px}.hero-in{padding-block:58px}.hero h1{font-size:42px}.float-one{left:-2px}.float-two{right:-2px}.expertise-track{justify-content:flex-start}.expertise-item{padding:13px 16px}.section{padding:70px 0}.audience-grid,.services-grid,.training-grid,.results-grid,.process,.credentials{grid-template-columns:1fr}.audience-card{grid-template-columns:1fr}.featured-service{padding:27px 22px}.process-step,.process-step:nth-child(3){border-left:3px solid var(--teal);border-top:1px solid var(--line)}.demo-row{grid-template-columns:95px 1fr 22px}.about-layout{gap:38px}.footer-in{flex-direction:column;align-items:flex-start}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important}}
+  </style>
 </head>
 <body>
-
-<!-- NAV -->
-<nav>
-  <a href="#" class="nav-logo"><img src="assets/ai-testing-logo.png" alt="AI Testing Training &amp; Services"></a>
-  <ul class="nav-links">
-    <li><a href="evaluador.html">Evaluador</a></li>
-    <li><a href="#servicios">Servicios</a></li>
-    <li><a href="#manuales">Manuales</a></li>
-    <li><a href="#sobre-mi">Sobre mí</a></li>
-    <li><a href="#training">Training</a></li>
-    <li><a href="#contacto">Contacto</a></li>
-  </ul>
-  <a href="#contacto" class="nav-cta">Trabajemos juntos</a>
-</nav>
-
-<!-- ═══ 1. HERO ═══ -->
-<section class="hero">
-  <div class="hero-content">
-    <div class="hero-tag rv">Líder QA &amp; QE · Transformación Digital · LATAM</div>
-    <h1 class="hero-title rv">
-      La calidad no<br>es un paso final.<br>
-      Es la <span class="orange">estrategia.</span>
-    </h1>
-    <p class="hero-desc rv">Consultoría QA para productos digitales en industrias reguladas. Formación de alto impacto para equipos en Latinoamérica, desde la práctica real.</p>
-    <div class="hero-actions rv">
-      <a href="evaluador.html" class="btn-p">Evaluar un caso gratis</a>
-      <a href="#servicios" class="btn-g">Ver servicios</a>
-    </div>
-    <div class="hero-stats rv">
-      <div><div class="hs-num">8<span>+</span></div><div class="hs-lbl">años en QA<br>sector regulado</div></div>
-      <div><div class="hs-num" style="color:var(--navy)">3<span style="color:var(--orange)">×</span></div><div class="hs-lbl">reducción ciclos<br>de regresión</div></div>
-    </div>
-  </div>
-  <div class="hero-visual rv">
-    <div class="hero-photo-wrap">
-      <div class="hero-photo-bg"></div>
-      <img class="hero-photo" src="assets/atenas-quintana.png" alt="Atenas Quintana Blas">
-      <div class="hero-badge">
-        <div class="hb-role">Líder QA &amp; QE · Transformación Digital e IA</div>
-        <div class="hb-name">Atenas Quintana Blas</div>
-      </div>
-      <div class="hero-cert">ISTQB<br>GAIPC™<br>CPEFPC™</div>
-    </div>
-  </div>
-</section>
-
-<!-- MARQUEE -->
-<div class="mq-wrap">
-  <div class="mq">
-    <div class="mq-item"><span class="mq-dot"></span>ISTQB Certified</div><div class="mq-item"><span class="mq-dot"></span>ISO/IEC 25010</div><div class="mq-item"><span class="mq-dot"></span>Shift Left</div><div class="mq-item"><span class="mq-dot"></span>Automatización QA</div><div class="mq-item"><span class="mq-dot"></span>Performance Testing</div><div class="mq-item"><span class="mq-dot"></span>Security QA</div><div class="mq-item"><span class="mq-dot"></span>Risk-Based Testing</div><div class="mq-item"><span class="mq-dot"></span>IA Generativa</div><div class="mq-item"><span class="mq-dot"></span>Jira · Xray</div><div class="mq-item"><span class="mq-dot"></span>Selenium · Playwright</div><div class="mq-item"><span class="mq-dot"></span>Banca · Seguros · Telecom</div><div class="mq-item"><span class="mq-dot"></span>ISTQB Certified</div><div class="mq-item"><span class="mq-dot"></span>ISO/IEC 25010</div><div class="mq-item"><span class="mq-dot"></span>Shift Left</div><div class="mq-item"><span class="mq-dot"></span>Automatización QA</div><div class="mq-item"><span class="mq-dot"></span>Performance Testing</div><div class="mq-item"><span class="mq-dot"></span>Security QA</div><div class="mq-item"><span class="mq-dot"></span>Risk-Based Testing</div><div class="mq-item"><span class="mq-dot"></span>IA Generativa</div><div class="mq-item"><span class="mq-dot"></span>Jira · Xray</div><div class="mq-item"><span class="mq-dot"></span>Selenium · Playwright</div><div class="mq-item"><span class="mq-dot"></span>Banca · Seguros · Telecom</div>
-  </div>
-</div>
-
-<!-- EVALUADOR GRATUITO -->
-<section class="eval-sec" id="evaluador">
-  <div class="eval-wrap">
-    <div class="eval-copy rv">
-      <div class="eval-label">Herramienta gratuita · AI Testing CaseLab</div>
-      <h2>Convierte una visita en un <span>diagnóstico útil.</span></h2>
-      <p>Pega un caso de prueba y obtén una revisión inmediata de estructura, claridad, trazabilidad y preparación para reutilización. Es una primera orientación alineada con buenas prácticas ISTQB e ISO/IEC/IEEE 29119.</p>
-      <div class="eval-actions">
-        <a href="evaluador.html" class="btn-p">Abrir evaluador gratuito</a>
-        <span class="eval-note">Sin registro · Sin enviar tu contenido</span>
-      </div>
-    </div>
-    <div class="eval-card rv">
-      <div class="eval-card-title">Del diagnóstico a QA Intelligent</div>
-      <ul class="eval-list">
-        <li>Puntaje general y seis dimensiones de calidad.</li>
-        <li>Detección de omisiones y lenguaje ambiguo.</li>
-        <li>Recomendación estándar para mejorar el diseño.</li>
+  <div class="topbar">Consultoría QA · Formación profesional · Herramientas AI Testing para Latinoamérica</div>
+  <nav class="nav" aria-label="Navegación principal">
+    <div class="container nav-in">
+      <a class="brand" href="#inicio"><span class="brand-mark">AI</span><span class="brand-copy">Testing <span>by Atenas</span></span></a>
+      <button class="menu-button" id="menuButton" type="button" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span><span></span></button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#servicios">Servicios</a></li><li><a href="#formacion">Formación</a></li><li><a href="#recursos">Recursos</a></li><li><a href="evaluador.html">Evaluador</a></li><li><a href="#sobre-mi">Sobre mí</a></li><li><a href="#faq">FAQ</a></li><li><a class="nav-button" href="#contacto">Contacto</a></li>
       </ul>
-      <div class="eval-upgrade"><strong>Servicio profesional:</strong> depuración, búsqueda de reutilización, rediseño, trazabilidad, proyección de automatización y exportación a Jira/Xray o TestRail.</div>
     </div>
-  </div>
-</section>
+  </nav>
 
-<!-- ═══ 2. PROBLEMA ═══ -->
-<section id="problema" style="background:var(--off)">
-  <div class="sec-in">
-    <div class="sec-lbl rv">El problema real</div>
-    <h2 class="sec-title rv">El QA tradicional<br><span class="teal">ya no es suficiente.</span></h2>
-    <div class="prb-grid">
-      <div class="rv">
-        <p style="font-size:14.5px;color:var(--gray);line-height:1.85;font-weight:300;margin-bottom:20px">Las consultoras facturan horas, no valor. El QA ejecuta sin entender el negocio. Y la automatización se implementa donde es más fácil — no donde más duele si falla.</p>
-        <p style="font-size:14.5px;color:var(--gray);line-height:1.85;font-weight:300;margin-bottom:20px">Con la IA comprimiendo los tiempos de ejecución, <strong style="color:var(--navy);font-weight:600">lo único que diferencia a un QA estratégico de uno reemplazable es el criterio.</strong></p>
-        <div class="prb-callout">
-          <p>Ahora cobras por lo que sabes — y por hacer más en menos tiempo. Ese es el verdadero valor del QA estratégico.</p>
-        </div>
-      </div>
-      <div class="rv">
-        <div class="compare">
-          <div class="compare-hd">
-            <div class="ch-bad">QA Reactivo</div>
-            <div class="ch-good">QA Estratégico</div>
-          </div>
-          <div class="compare-row"><div class="cr-bad">Prueba lo que le piden</div><div class="cr-good">Entiende qué debe probarse</div></div>
-          <div class="compare-row"><div class="cr-bad">Automatiza donde es fácil</div><div class="cr-good">Automatiza donde duele</div></div>
-          <div class="compare-row"><div class="cr-bad">Desconoce procesos críticos</div><div class="cr-good">Mapea cada prueba a un riesgo</div></div>
-          <div class="compare-row"><div class="cr-bad">Su valor termina al sprint</div><div class="cr-good">Su criterio protege en el tiempo</div></div>
-          <div class="compare-row"><div class="cr-bad">Cobrable por hora</div><div class="cr-good">Cobrable por resultado</div></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ 3. ARTÍCULOS ═══ -->
-<section id="articulos" class="art-sec">
-  <div class="sec-in">
-    <div class="sec-lbl rv">Conocimiento aplicado</div>
-    <h2 class="sec-title rv">Artículos desde<br><span class="teal">la práctica real.</span></h2>
-    <div class="art-grid rv">
-      <div class="art-featured">
-        <div class="art-eyebrow">⭐ Artículo ancla · Fundamentos QA</div>
-        <h3>Por qué el 80% de los QA no entiende el negocio que está probando</h3>
-        <p>El gap silencioso que destruye la calidad real y convierte al QA en cuello de botella. Cómo romper ese ciclo con criterio, no con más herramientas.</p>
-        <div class="art-meta">
-          <span>10 min · Todos los niveles</span>
-          <a href="#contacto" class="art-link">Leer artículo →</a>
-        </div>
-      </div>
-      <div class="art-side">
-        <div class="art-card">
-          <div class="art-card-tag">Estrategia · Tendencias</div>
-          <h4>Shift Left sin pipeline: cómo aplicar el principio real</h4>
-          <p>Prácticas modernas adaptadas a la realidad de cada empresa.</p>
-        </div>
-        <div class="art-card">
-          <div class="art-card-tag">Automatización · ISTQB</div>
-          <h4>Cobertura de código vs cobertura de riesgo</h4>
-          <p>100% ejecutado y 0% de cobertura real del riesgo crítico.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ 4. MANUALES ═══ -->
-<section id="manuales">
-  <div class="sec-in">
-    <div class="sec-lbl rv">Recursos descargables</div>
-    <h2 class="sec-title rv">3 guías con casos reales de<br><span class="teal">banca, seguros y telecom.</span></h2>
-    <div class="mnl-grid rv">
-      <div class="mnl-card">
-        <div class="mnl-etapa">Etapa 1</div>
-        <span class="mnl-icon">📘</span>
-        <div class="mnl-name">Fundamentos del Testing de Software</div>
-        <div class="mnl-desc">Principios, SDLC, defect management y comunicación profesional QA.</div>
-        <div class="mnl-pills"><span class="mnl-pill">7 módulos</span><span class="mnl-pill">37 páginas</span></div>
-      </div>
-      <div class="mnl-card">
-        <div class="mnl-etapa">Etapa 2</div>
-        <span class="mnl-icon">📗</span>
-        <div class="mnl-name">Testing Orientado al Trabajo Real</div>
-        <div class="mnl-desc">Casos reales, cobertura basada en riesgo y comunicación con el equipo.</div>
-        <div class="mnl-pills"><span class="mnl-pill">8 módulos</span><span class="mnl-pill">30 páginas</span></div>
-      </div>
-      <div class="mnl-card or">
-        <div class="mnl-etapa">Etapa 3</div>
-        <span class="mnl-icon">📙</span>
-        <div class="mnl-name">Manual de Referencia Profesional</div>
-        <div class="mnl-desc">Heurísticas, plantillas, checklists y marcos de decisión para el día a día.</div>
-        <div class="mnl-pills"><span class="mnl-pill">6 secciones</span><span class="mnl-pill">24 páginas</span></div>
-      </div>
-    </div>
-    <div class="mnl-bundle rv">
-      <div class="mnl-bundle-left">
-        <div class="mnl-bundle-badge">Oferta de lanzamiento · 70% OFF</div>
-        <h3>¿Quieres ser QA Profesional en LATAM?</h3>
-        <p>Los 3 manuales juntos · Pago único · Acceso inmediato</p>
-        <p class="mnl-pay">Yape · Plin · PayPal</p>
-      </div>
-      <div class="mnl-price-wrap">
-        <div>
-          <div class="mnl-old">USD $99</div>
-          <div class="mnl-new">USD $30</div>
-        </div>
-        <a href="#contacto" class="btn-p" style="font-size:11px;padding:13px 26px;white-space:nowrap">Quiero los 3 manuales</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ 5. SERVICIOS ═══ -->
-<section id="servicios" class="srv-sec">
-  <div class="sec-in">
-    <div class="sec-lbl rv">Cómo trabajo contigo</div>
-    <h2 class="sec-title rv">7 servicios para<br><span class="teal">cada etapa QA.</span></h2>
-    <p class="sec-sub rv">Desde diagnóstico gratuito hasta acompañamiento mensual. Cada servicio entrega un resultado concreto.</p>
-    <!-- S0 -->
-    <div class="srv-s0 rv">
+  <header class="hero" id="inicio">
+    <div class="container hero-in">
       <div>
-        <div class="srv-s0-badge">S0 · Gratuito</div>
-        <div class="srv-s0-name">Diagnóstico QA Inicial</div>
-        <div class="srv-s0-desc">Primera mirada profesional a tu producto. Evalúo el flujo crítico como usuario real — entrego informe con hallazgos funcionales, rendimiento y seguridad básica.</div>
-        <div class="tags" style="margin-top:14px"><span class="tag">Chrome DevTools</span><span class="tag">PageSpeed</span><span class="tag">OWASP básico</span><span class="tag">3–5 días</span><span class="tag">Informe PDF</span></div>
+        <div class="eyebrow">Atenas Quintana · QA Strategy &amp; Engineering</div>
+        <h1>Convierto la calidad en una <em>ventaja</em> para tu <span class="orange">negocio.</span></h1>
+        <p class="hero-lead">Ayudo a profesionales y equipos de Latinoamérica a pasar de “ejecutar pruebas” a construir una calidad <strong>medible, reutilizable y preparada para automatización.</strong></p>
+        <div class="actions"><a class="button button-primary" href="evaluador.html">Evaluar un caso gratis →</a><a class="button button-outline" href="#servicios">Descubrir servicios</a></div>
+        <div class="hero-proof"><span class="proof">ISTQB Certified</span><span class="proof">8+ años en QA</span><span class="proof">Banca · Seguros · Telecom</span><span class="proof">Perú · Venezuela · LATAM</span></div>
       </div>
-      <div class="srv-s0-right">
-        <div class="srv-s0-note">Videollamada de cierre incluida</div>
-        <a href="#contacto" class="btn-p" style="font-size:10px;padding:10px 20px">Solicitar gratis</a>
-      </div>
-    </div>
-    <!-- S1–S6 -->
-    <div class="srv-grid rv">
-      <div class="srv-card"><div class="srv-num">S1 · Por proyecto</div><div class="srv-icon">🔍</div><div class="srv-name">Diagnóstico de Madurez QA</div><div class="srv-desc">Mapa real de tu equipo por dimensiones ISTQB nivel 0–3. Hoja de ruta priorizada mes 1, 3 y 6.</div><div class="tags"><span class="tag">ISTQB</span><span class="tag">1 semana</span></div></div>
-      <div class="srv-card"><div class="srv-num">S2 · Por proyecto</div><div class="srv-icon">🗺️</div><div class="srv-name">Estrategia de Pruebas</div><div class="srv-desc">Qué, cómo y cuándo probar. Mapa de flujos críticos, tipos de prueba y criterios de aceptación.</div><div class="tags"><span class="tag">Risk-Based</span><span class="tag">ISO 25010</span><span class="tag">1–2 semanas</span></div></div>
-      <div class="srv-card or"><div class="srv-num">S3 · Mensual/Sprint</div><div class="srv-icon">📋</div><div class="srv-name">Casos de Prueba y Cobertura</div><div class="srv-desc">Suite con trazabilidad a riesgo. Casos funcionales, de borde y negativos. Reporte por sprint.</div><div class="tags"><span class="tag or" style="color:var(--orange);border-color:rgba(249,104,25,0.3);background:rgba(249,104,25,0.05)">Jira · Xray</span><span class="tag or" style="color:var(--orange);border-color:rgba(249,104,25,0.3);background:rgba(249,104,25,0.05)">Continuo</span></div></div>
-      <div class="srv-card or"><div class="srv-num">S4 · Por evaluación</div><div class="srv-icon">⚡</div><div class="srv-name">Performance y Seguridad</div><div class="srv-desc">Carga, estrés y OWASP sobre flujos críticos. Informe técnico con cuellos de botella.</div><div class="tags"><span class="tag or" style="color:var(--orange);border-color:rgba(249,104,25,0.3);background:rgba(249,104,25,0.05)">JMeter</span><span class="tag or" style="color:var(--orange);border-color:rgba(249,104,25,0.3);background:rgba(249,104,25,0.05)">OWASP</span><span class="tag or" style="color:var(--orange);border-color:rgba(249,104,25,0.3);background:rgba(249,104,25,0.05)">3–5 días</span></div></div>
-      <div class="srv-card"><div class="srv-num">S5 · Por proyecto</div><div class="srv-icon">🤖</div><div class="srv-name">Hoja de Ruta Automatización</div><div class="srv-desc">Qué automatizar, con qué stack y con qué ROI. Sin automatizar por moda.</div><div class="tags"><span class="tag">Selenium</span><span class="tag">Playwright</span><span class="tag">2–4 semanas</span></div></div>
-      <div class="srv-card ai"><div class="srv-num">S6 · Módulo profesional</div><div class="srv-icon" style="background:rgba(124,58,237,0.08);border-color:rgba(124,58,237,0.25)">🧠</div><div class="srv-name">QA Intelligent</div><div class="srv-desc">Transforma casos existentes en activos depurados, reutilizables y preparados para automatización y migración.</div><div class="tags"><span class="tag-ai tag">Reutilización</span><span class="tag-ai tag">Automation-ready</span><span class="tag-ai tag">Xray · TestRail</span></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ IMPACTO ═══ -->
-<section class="impact-sec">
-  <div class="sec-in">
-    <div class="sec-lbl rv" style="color:rgba(55,174,178,0.6)">Resultados</div>
-    <h2 class="sec-title rv" style="color:var(--white)">Números que<br><span class="teal">hablan por sí solos.</span></h2>
-    <div class="impact-grid rv">
-      <div class="imp-cell"><div class="imp-num">8<span class="imp-unit">+</span></div><div class="imp-lbl">años en QA sector regulado</div></div>
-      <div class="imp-cell"><div class="imp-num">3<span class="imp-unit">×</span></div><div class="imp-lbl">reducción ciclos de regresión</div></div>
-      <div class="imp-cell"><div class="imp-num">LATAM<span class="imp-unit"></span></div><div class="imp-lbl">enfoque regional: seguros, banca, telecom</div></div>
-      <div class="imp-cell"><div class="imp-num">3<span class="imp-unit"></span></div><div class="imp-lbl">industrias reguladas: seguros, banca, telecom</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ 6. SOBRE MÍ ═══ -->
-<section id="sobre-mi" class="about-sec">
-  <div class="sec-in">
-    <div class="sec-lbl rv">Sobre mí</div>
-    <h2 class="sec-title rv">Atenas Quintana Blas<br><span class="teal">QA Lead · Estratega · Formadora LATAM</span></h2>
-    <div class="about-grid">
-      <div class="about-photo-col rv">
-        <img class="about-photo" src="assets/atenas-quintana.png" alt="Atenas Quintana Blas">
-        <div class="about-name">Atenas Quintana Blas</div>
-        <div class="about-role">QA Automation &amp; Performance Lead<br>Fundadora aitesting.lat</div>
-      </div>
-      <div class="about-text rv">
-        <h3>QA no es solo encontrar bugs.<br>Es <em style="color:var(--teal)">proteger lo que importa.</em></h3>
-        <p>Soy QA Automation &amp; Performance Lead con experiencia en industrias reguladas de Latinoamérica. Transformo equipos que ejecutan pruebas en equipos que <strong>protegen la calidad desde el origen.</strong></p>
-        <p>Fundé <strong>aitesting.lat</strong> porque el mercado LATAM no necesita más teoría reciclada. Necesita criterio real y metodología aplicable con los recursos que tienes hoy.</p>
-        <div class="creds-row">
-          <div class="cred"><div class="cred-t">ISTQB Certified</div><div class="cred-o">Foundation Level</div></div>
-          <div class="cred"><div class="cred-t">GAIPC™</div><div class="cred-o">AI Professional</div></div>
-          <div class="cred or"><div class="cred-t">CPEFPC™</div><div class="cred-o">Performance</div></div>
-          <div class="cred"><div class="cred-t">ISO/IEC 25010</div><div class="cred-o">Quality Model</div></div>
-          <div class="cred or"><div class="cred-t">Jira · Xray</div><div class="cred-o">Test Management</div></div>
-          <div class="cred"><div class="cred-t">IA Generativa</div><div class="cred-o">Claude · ChatGPT · Copilot</div></div>
-        </div>
+      <div class="portrait-area">
+        <div class="portrait-frame"><div class="portrait-bg"></div><img class="portrait" src="assets/atenas-quintana.png" alt="Atenas Quintana, consultora y formadora QA" width="800" height="800"><div class="portrait-caption"><strong>Atenas Quintana Blas</strong><span>QA Automation &amp; Performance Lead</span></div><div class="float-card float-one"><strong>8+</strong><span>años protegiendo productos</span></div><div class="float-card float-two"><strong>LATAM</strong><span>experiencia sector regulado</span></div></div>
       </div>
     </div>
-  </div>
-</section>
+  </header>
 
-<!-- ═══ TRAINING ═══ -->
-<section id="training" style="background:var(--off)">
-  <div class="sec-in">
-    <div class="sec-lbl rv">Formación</div>
-    <h2 class="sec-title rv">Aprende QA con quien<br><span class="teal">lo vive en producción.</span></h2>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:52px;margin-top:48px">
-      <div class="rv" style="display:flex;flex-direction:column;gap:2px">
-        <div style="display:flex;gap:14px;padding:16px;border:1px solid var(--bd);border-left:3px solid var(--teal);background:var(--white);margin-bottom:2px"><span style="font-family:var(--ff-m);font-size:10px;font-weight:500;color:var(--white);background:var(--teal);padding:3px 8px;border-radius:1px;white-space:nowrap;height:fit-content">N1</span><div><div style="font-family:var(--ff-d);font-size:13px;font-weight:700;color:var(--navy);margin-bottom:3px">Fundamentos del Testing · Etapa 1</div><div style="font-size:11.5px;color:var(--gray)">Principios ISTQB, SDLC y defect management.</div></div></div>
-        <div style="display:flex;gap:14px;padding:16px;border:1px solid var(--bd);border-left:3px solid var(--teal);background:var(--white);margin-bottom:2px"><span style="font-family:var(--ff-m);font-size:10px;font-weight:500;color:var(--white);background:var(--teal);padding:3px 8px;border-radius:1px;white-space:nowrap;height:fit-content">N1</span><div><div style="font-family:var(--ff-d);font-size:13px;font-weight:700;color:var(--navy);margin-bottom:3px">Testing Orientado al Trabajo Real · Etapa 2</div><div style="font-size:11.5px;color:var(--gray)">Casos reales de banca, seguros y telecom.</div></div></div>
-        <div style="display:flex;gap:14px;padding:16px;border:1px solid var(--bd);border-left:3px solid var(--orange);background:var(--white);margin-bottom:2px"><span style="font-family:var(--ff-m);font-size:10px;font-weight:500;color:var(--white);background:var(--orange);padding:3px 8px;border-radius:1px;white-space:nowrap;height:fit-content">N2</span><div><div style="font-family:var(--ff-d);font-size:13px;font-weight:700;color:var(--navy);margin-bottom:3px">Automatización Web · Selenium + Playwright</div><div style="font-size:11.5px;color:var(--gray)">12 módulos con el SOAT quoter. Field notes LATAM.</div></div></div>
-        <div style="display:flex;gap:14px;padding:16px;border:1px solid var(--bd);border-left:3px solid var(--orange);background:var(--white);margin-bottom:2px"><span style="font-family:var(--ff-m);font-size:10px;font-weight:500;color:var(--white);background:var(--orange);padding:3px 8px;border-radius:1px;white-space:nowrap;height:fit-content">N2</span><div><div style="font-family:var(--ff-d);font-size:13px;font-weight:700;color:var(--navy);margin-bottom:3px">REST API Automation · Python en AWS</div><div style="font-size:11.5px;color:var(--gray)">Proyecto ApiVehiculos como caso de estudio.</div></div></div>
-        <div style="display:flex;gap:14px;padding:16px;border:1px solid var(--bd);border-left:3px solid var(--navy);background:var(--white)"><span style="font-family:var(--ff-m);font-size:10px;font-weight:500;color:var(--white);background:var(--navy);padding:3px 8px;border-radius:1px;white-space:nowrap;height:fit-content">N3</span><div><div style="font-family:var(--ff-d);font-size:13px;font-weight:700;color:var(--navy);margin-bottom:3px">IA Generativa para QA y Desarrollo · 24 hrs</div><div style="font-size:11.5px;color:var(--gray)">Prompt engineering para Agile. Formato corporativo.</div></div></div>
-      </div>
-      <div class="rv" style="display:flex;flex-direction:column;gap:16px">
-        <div style="border:1px solid var(--bd);background:var(--white);padding:24px">
-          <h4 style="font-family:var(--ff-d);font-size:15px;font-weight:800;color:var(--navy);margin-bottom:16px">Formatos disponibles</h4>
-          <div style="display:flex;flex-direction:column;gap:10px">
-            <div style="display:flex;justify-content:space-between;font-size:12.5px"><span style="color:var(--gray)">Manuales PDF</span><span style="font-family:var(--ff-m);font-size:10px;color:var(--orange)">Descargable</span></div>
-            <div style="height:1px;background:var(--bd)"></div>
-            <div style="display:flex;justify-content:space-between;font-size:12.5px"><span style="color:var(--gray)">Cursos online</span><span style="font-family:var(--ff-m);font-size:10px;color:var(--orange)">Async + Live</span></div>
-            <div style="height:1px;background:var(--bd)"></div>
-            <div style="display:flex;justify-content:space-between;font-size:12.5px"><span style="color:var(--gray)">Corporativo</span><span style="font-family:var(--ff-m);font-size:10px;color:var(--orange)">A medida</span></div>
-            <div style="height:1px;background:var(--bd)"></div>
-            <div style="display:flex;justify-content:space-between;font-size:12.5px"><span style="color:var(--gray)">Mentoría 1:1</span><span style="font-family:var(--ff-m);font-size:10px;color:var(--teal)">Disponible</span></div>
-          </div>
-        </div>
-        <div style="border:1px solid var(--bd);border-top:3px solid var(--teal);background:var(--white);padding:24px">
-          <h4 style="font-family:var(--ff-d);font-size:14px;font-weight:800;color:var(--navy);margin-bottom:12px">Mercado QA Testing LATAM</h4>
-          <div style="display:flex;flex-direction:column;gap:9px">
-            <div style="display:flex;justify-content:space-between;font-size:12px"><span style="color:var(--gray)">Mercado 2025</span><span style="font-family:var(--ff-d);font-weight:700;color:var(--navy)">USD 12,450 M</span></div>
-            <div style="height:1px;background:var(--bd)"></div>
-            <div style="display:flex;justify-content:space-between;font-size:12px"><span style="color:var(--gray)">Proyección 2032</span><span style="font-family:var(--ff-d);font-weight:700;color:var(--teal)">USD 25,780 M</span></div>
-            <div style="height:1px;background:var(--bd)"></div>
-            <div style="display:flex;justify-content:space-between;font-size:12px"><span style="color:var(--gray)">CAGR</span><span style="font-family:var(--ff-d);font-weight:700;color:var(--orange)">~11% anual</span></div>
-          </div>
-        </div>
+  <section class="expertise" aria-label="Áreas de experiencia"><div class="expertise-track"><span class="expertise-item">QA Strategy</span><span class="expertise-item">Test Design</span><span class="expertise-item">Automation</span><span class="expertise-item">Performance</span><span class="expertise-item">AI for Testing</span><span class="expertise-item">Jira · Xray</span></div></section>
+
+  <section class="section" aria-labelledby="para-quien">
+    <div class="container">
+      <div class="section-head"><div><div class="eyebrow">Dos caminos, una misma meta</div><h2 id="para-quien">Calidad que crece <em>contigo.</em></h2></div><p>Elige el recorrido que mejor representa tu momento actual. La metodología se adapta a la persona, al equipo y al riesgo real del producto.</p></div>
+      <div class="audience-grid">
+        <article class="audience-card"><div class="audience-icon">🎯</div><div><h3>Para profesionales QA, QC y desarrollo</h3><p>Evalúa tu nivel, mejora el diseño de pruebas, fortalece tu criterio y proyecta tu trabajo hacia automatización e IA.</p><a class="text-link" href="#formacion">Ver formación y recursos →</a></div></article>
+        <article class="audience-card"><div class="audience-icon">🏢</div><div><h3>Para líderes, equipos y empresas</h3><p>Diagnóstico, estrategia, cobertura, rendimiento, seguridad y acompañamiento para convertir QA en capacidad de negocio.</p><a class="text-link" href="#servicios">Ver servicios corporativos →</a></div></article>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ═══ 7. CONTACTO ═══ -->
-<section id="contacto" class="cta-sec">
-  <div class="cta-in">
-    <h2 class="rv">¿Listo para que la calidad<br>sea tu <em>ventaja competitiva?</em></h2>
-    <p class="rv">Empieza evaluando un caso de prueba o cuéntame el reto de calidad de tu equipo. Respondo en menos de 48 horas.</p>
-    <div class="cta-actions rv">
-      <a href="evaluador.html" class="btn-p">Evaluar un caso gratis</a>
-      <a href="mailto:aitestingservicesperu@gmail.com" class="btn-wh">Enviar mensaje</a>
-      <a href="#servicios" class="btn-wh">Ver servicios S0–S6</a>
+  <section class="section section-off" id="servicios" aria-labelledby="servicios-title">
+    <div class="container">
+      <div class="section-head"><div><div class="eyebrow">Servicios profesionales</div><h2 id="servicios-title">De la brecha actual a una calidad <em>sostenible.</em></h2></div><p>No vendo herramientas por moda. Primero entiendo el riesgo, el contexto y la capacidad del equipo; después diseño una ruta con entregables concretos.</p></div>
+      <article class="featured-service">
+        <div><span class="feature-badge">Servicio principal · QA Intelligent</span><h3>Casos de prueba que dejan de ser documentos y se convierten en activos.</h3><p>Depuro, normalizo y transformo diseños existentes para reutilizarlos, reducir duplicidad, preparar automatización y migrarlos a repositorios de gestión.</p><div class="actions"><a class="button button-orange" href="https://wa.me/51992097896?text=Hola%20Atenas%2C%20quiero%20informaci%C3%B3n%20sobre%20QA%20Intelligent" target="_blank" rel="noopener">Solicitar diagnóstico</a><a class="button button-light" href="evaluador.html">Probar versión gratuita</a></div></div>
+        <div class="pipeline"><div class="pipe"><span class="pipe-num">01</span><strong>Depurar</strong><span>claridad y consistencia</span></div><div class="pipe"><span class="pipe-num">02</span><strong>Definir</strong><span>modelo y trazabilidad</span></div><div class="pipe"><span class="pipe-num">03</span><strong>Reutilizar</strong><span>repositorio y cobertura</span></div><div class="pipe"><span class="pipe-num">04</span><strong>Automatizar</strong><span>prioridad y viabilidad</span></div><div class="pipe"><span class="pipe-num">05</span><strong>Exportar</strong><span>Xray · TestRail</span></div></div>
+      </article>
+      <div class="services-grid">
+        <article class="service"><span class="service-num">S01 · ESTRATEGIA</span><div class="service-icon">🧭</div><h3>Diagnóstico de madurez QA</h3><p>Mapa del estado actual, brechas, riesgos y hoja de ruta priorizada para 30, 90 y 180 días.</p><div class="tags"><span class="tag">ISTQB</span><span class="tag">Risk-based</span></div></article>
+        <article class="service"><span class="service-num">S02 · DISEÑO</span><div class="service-icon">📋</div><h3>Cobertura y diseño de pruebas</h3><p>Escenarios funcionales, negativos y de borde con trazabilidad hacia requisitos y riesgos.</p><div class="tags"><span class="tag">ISO 29119</span><span class="tag">Xray</span></div></article>
+        <article class="service"><span class="service-num">S03 · AUTOMATIZACIÓN</span><div class="service-icon">🤖</div><h3>Hoja de ruta automation</h3><p>Qué automatizar, con qué stack, en qué orden y con qué retorno esperado.</p><div class="tags"><span class="tag">Playwright</span><span class="tag">Selenium</span></div></article>
+        <article class="service"><span class="service-num">S04 · CALIDAD TÉCNICA</span><div class="service-icon">⚡</div><h3>Performance y seguridad</h3><p>Carga, estrés y controles OWASP sobre flujos críticos con hallazgos accionables.</p><div class="tags"><span class="tag">JMeter</span><span class="tag">OWASP</span></div></article>
+        <article class="service"><span class="service-num">S05 · LIDERAZGO</span><div class="service-icon">👥</div><h3>QA Leadership 360</h3><p>Estrategia, estimación, proveedores, métricas, priorización y acompañamiento al líder QA.</p><div class="tags"><span class="tag">Governance</span><span class="tag">KPI</span></div></article>
+        <article class="service"><span class="service-num">S06 · CONTINUIDAD</span><div class="service-icon">🔄</div><h3>QA as a Service</h3><p>Acompañamiento por sprint para equipos que necesitan criterio experto sin ampliar estructura fija.</p><div class="tags"><span class="tag">Retainer</span><span class="tag">Sprint</span></div></article>
+      </div>
     </div>
-    <!-- WhatsApp buttons -->
-    <div class="rv" style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:28px">
-      <a href="https://wa.me/51992097896" target="_blank" style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.85);padding:10px 20px;text-decoration:none;border-radius:2px;font-family:var(--ff-m);font-size:10px;letter-spacing:.8px;transition:all .2s" onmouseover="this.style.borderColor='#37AEB2';this.style.color='#37AEB2'" onmouseout="this.style.borderColor='rgba(255,255,255,0.15)';this.style.color='rgba(255,255,255,0.85)'">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        🇵🇪 +51 992 097 896
-      </a>
-      <a href="https://wa.me/584122295738" target="_blank" style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.85);padding:10px 20px;text-decoration:none;border-radius:2px;font-family:var(--ff-m);font-size:10px;letter-spacing:.8px;transition:all .2s" onmouseover="this.style.borderColor='#37AEB2';this.style.color='#37AEB2'" onmouseout="this.style.borderColor='rgba(255,255,255,0.15)';this.style.color='rgba(255,255,255,0.85)'">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        🇻🇪 +58 412 229 5738
-      </a>
-    </div>
-    <div class="cta-links rv">
-      <a href="https://www.linkedin.com/in/atenas-quintana" class="cta-link" target="_blank">LinkedIn</a>
-      <a href="mailto:aitestingservicesperu@gmail.com" class="cta-link">aitestingservicesperu@gmail.com</a>
-      <span class="cta-link" style="cursor:default">Lima, Perú · Caracas, Venezuela</span>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- FOOTER -->
-<footer>
-  <img class="foot-logo" src="assets/ai-testing-logo.png" alt="AI Testing Training & Services">
-  <div class="foot-txt">QA Strategy · Consulting · Formación LATAM</div>
-  <div class="foot-r">© 2026 · Atenas Quintana Blas · aitestingservicesperu@gmail.com</div>
-</footer>
+  <section class="section section-dark" id="herramientas" aria-labelledby="tool-title">
+    <div class="container tool-layout">
+      <div><div class="eyebrow">Herramienta gratuita · AI Testing CaseLab</div><h2 class="tool-title" id="tool-title">Evalúa un caso. Descubre su potencial de <em>reutilización.</em></h2><p class="tool-text">Pega un diseño y recibe un puntaje de 0 a 100, revisión de seis dimensiones, alertas de ambigüedad y una recomendación estándar. Es el primer paso antes del análisis profesional QA Intelligent.</p><div class="actions"><a class="button button-primary" href="evaluador.html">Abrir evaluador gratuito →</a></div><div class="tool-meta"><span>Sin registro</span><span>Procesamiento local</span><span>ISTQB</span><span>ISO/IEC/IEEE 29119</span></div></div>
+      <div class="score-demo" role="img" aria-label="Ejemplo de resultado del evaluador con puntaje 78"><div class="score-top"><div class="score-circle"><strong>78</strong></div><div><h3>Diseño estandarizable</h3><p>Buena base con oportunidades de reutilización.</p></div></div><div class="demo-bars"><div class="demo-row"><span>Identificación</span><div class="demo-bar"><span class="w90"></span></div><b>90</b></div><div class="demo-row"><span>Pasos</span><div class="demo-bar"><span class="w82"></span></div><b>82</b></div><div class="demo-row"><span>Datos</span><div class="demo-bar"><span class="w58"></span></div><b>58</b></div><div class="demo-row"><span>Resultados</span><div class="demo-bar"><span class="w76"></span></div><b>76</b></div></div></div>
+    </div>
+  </section>
 
-<script>
-const obs = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('on'); obs.unobserve(e.target); } });
-}, { threshold:0.08, rootMargin:'0px 0px -30px 0px' });
-document.querySelectorAll('.rv').forEach(el => obs.observe(el));
-</script>
+  <section class="section" id="resultados" aria-labelledby="resultados-title">
+    <div class="container"><div class="section-head"><div><div class="eyebrow">Experiencia aplicada</div><h2 id="resultados-title">Calidad conectada con el <em>resultado.</em></h2></div><p>Mi enfoque combina criterio funcional, ingeniería, gestión y formación para que la calidad sea visible en decisiones y no solo en reportes.</p></div><div class="results-grid"><div class="result-stat"><strong>8<span>+</span></strong><p>años en productos y sectores regulados</p></div><div class="result-stat"><strong>3<span>×</span></strong><p>reducción lograda en ciclos de regresión</p></div><div class="result-stat"><strong>3</strong><p>industrias: banca, seguros y telecom</p></div><div class="result-stat"><strong>360<span>°</span></strong><p>visión funcional, técnica y de liderazgo</p></div></div><div class="process"><article class="process-step"><span>01 · ESCUCHAR</span><h3>Contexto y riesgo</h3><p>Entiendo el producto, el equipo y la presión real del negocio.</p></article><article class="process-step"><span>02 · DIAGNOSTICAR</span><h3>Evidencia actual</h3><p>Reviso procesos, activos, cobertura, herramientas y métricas.</p></article><article class="process-step"><span>03 · PRIORIZAR</span><h3>Ruta de valor</h3><p>Ordeno acciones por impacto, urgencia, esfuerzo y dependencia.</p></article><article class="process-step"><span>04 · TRANSFERIR</span><h3>Capacidad interna</h3><p>Dejo método, conocimiento y activos que el equipo puede sostener.</p></article></div></div>
+  </section>
+
+  <section class="section section-off" id="formacion" aria-labelledby="formacion-title">
+    <div class="container"><div class="section-head"><div><div class="eyebrow">Formación para el trabajo real</div><h2 id="formacion-title">Aprende QA con contexto de <em>producción.</em></h2></div><p>Programas para personas y empresas que necesitan aplicar conceptos, resolver situaciones reales y desarrollar criterio transferible.</p></div><div class="training-grid"><article class="course"><div class="course-top"><span class="course-level">Nivel 1 · Fundamentos</span><h3>Testing orientado al trabajo real</h3></div><div class="course-body"><p>Principios ISTQB, SDLC, diseño de casos, defectos y comunicación efectiva con el equipo.</p><div class="course-info"><span>ONLINE / CORPORATIVO</span><span>LATAM</span></div></div></article><article class="course"><div class="course-top"><span class="course-level">Nivel 2 · Ingeniería</span><h3>Automatización web y API</h3></div><div class="course-body"><p>Playwright, Selenium, Python y API testing mediante proyectos y decisiones técnicas reales.</p><div class="course-info"><span>PRÁCTICO</span><span>PROYECTOS</span></div></div></article><article class="course"><div class="course-top"><span class="course-level">Nivel 3 · Evolución</span><h3>IA generativa aplicada a QA</h3></div><div class="course-body"><p>Prompts, análisis, diseño, depuración y aceleración responsable del trabajo de calidad.</p><div class="course-info"><span>24 HORAS</span><span>A MEDIDA</span></div></div></article></div><div class="actions"><a class="button button-outline" href="mailto:aitestingservicesperu@gmail.com?subject=Informaci%C3%B3n%20sobre%20formaci%C3%B3n%20QA">Solicitar programa formativo</a></div></div>
+  </section>
+
+  <section class="section" id="recursos" aria-labelledby="recursos-title">
+    <div class="container"><div class="section-head"><div><div class="eyebrow">Biblioteca práctica</div><h2 id="recursos-title">Recursos para avanzar con <em>criterio.</em></h2></div><p>Material pensado para convertir teoría en decisiones, conversaciones y entregables que puedas usar en tu trabajo.</p></div><div class="resource-layout"><article class="resource-feature"><div class="eyebrow">Colección profesional</div><h3>Ruta QA Profesional LATAM</h3><p>Tres manuales: fundamentos, trabajo real y especialización. Incluyen casos, cobertura basada en riesgo y comunicación con equipos.</p><div class="actions"><a class="button button-orange" href="https://wa.me/51992097896?text=Hola%20Atenas%2C%20quiero%20informaci%C3%B3n%20sobre%20los%20manuales%20QA" target="_blank" rel="noopener">Conocer los manuales</a></div></article><div class="resource-list"><article class="resource-item"><span class="resource-number">01</span><div><h3>Diseño de casos que sí aportan cobertura</h3><p>Estructura, datos, resultados y riesgo.</p></div><span>→</span></article><article class="resource-item"><span class="resource-number">02</span><div><h3>Qué automatizar y qué dejar manual</h3><p>Estabilidad, frecuencia, valor y costo.</p></div><span>→</span></article><article class="resource-item"><span class="resource-number">03</span><div><h3>Cómo usar IA sin perder criterio QA</h3><p>Calidad de entrada, revisión y gobernanza.</p></div><span>→</span></article><article class="resource-item"><span class="resource-number">04</span><div><h3>Métricas para conversar con el negocio</h3><p>Riesgo, cobertura, escape y velocidad.</p></div><span>→</span></article></div></div></div>
+  </section>
+
+  <section class="section section-off" id="sobre-mi" aria-labelledby="about-title">
+    <div class="container about-layout"><div class="about-image"><img src="assets/atenas-quintana.png" alt="Retrato profesional de Atenas Quintana" width="800" height="800"></div><div class="about-copy"><div class="eyebrow">Sobre mí</div><h2 id="about-title">QA no es encontrar bugs. Es <em>proteger lo que importa.</em></h2><p>Soy <strong>Atenas Quintana Blas</strong>, QA Automation &amp; Performance Lead, estratega y formadora con más de ocho años de experiencia en industrias reguladas de Latinoamérica.</p><p>Creé <strong>AI Testing</strong> para acercar metodología, ingeniería e inteligencia artificial a profesionales y empresas que necesitan resultados aplicables, no teoría reciclada.</p><p>Trabajo conectando calidad funcional, rendimiento, seguridad, automatización y liderazgo con una pregunta constante: <strong>¿qué riesgo estamos reduciendo y qué capacidad estamos construyendo?</strong></p><div class="credentials"><div class="credential"><strong>ISTQB</strong><span>FOUNDATION LEVEL</span></div><div class="credential"><strong>GAIPC™</strong><span>AI PROFESSIONAL</span></div><div class="credential"><strong>CPEFPC™</strong><span>PERFORMANCE</span></div><div class="credential"><strong>ISO/IEC 25010</strong><span>QUALITY MODEL</span></div><div class="credential"><strong>Jira · Xray</strong><span>TEST MANAGEMENT</span></div><div class="credential"><strong>IA Generativa</strong><span>QA &amp; DEVELOPMENT</span></div></div></div></div>
+  </section>
+
+  <section class="section" id="faq" aria-labelledby="faq-title">
+    <div class="container"><div class="section-head"><div><div class="eyebrow">Preguntas frecuentes</div><h2 id="faq-title">Lo esencial antes de <em>empezar.</em></h2></div><p>Si tu situación necesita más contexto, escríbeme y definimos la mejor entrada: herramienta, formación o servicio profesional.</p></div><div class="faq"><details><summary>¿El evaluador gratuito reemplaza una revisión profesional?</summary><p>No. Entrega un puntaje y una orientación estándar. QA Intelligent analiza contexto, riesgo, repositorio, duplicidad, reutilización, automatización y formato de destino.</p></details><details><summary>¿Trabajas con profesionales y con empresas?</summary><p>Sí. Para profesionales hay formación, recursos y mentoría. Para empresas hay diagnóstico, estrategia, diseño, automatización, performance, seguridad y acompañamiento.</p></details><details><summary>¿Puedo enviar casos desde Excel, Word, PDF o herramientas QA?</summary><p>Sí. En el servicio profesional se pueden revisar formatos estructurados y exportaciones para normalizar o preparar migraciones hacia Jira/Xray, TestRail y otros repositorios.</p></details><details><summary>¿Los servicios son solo para Perú?</summary><p>No. El trabajo puede realizarse de forma remota para profesionales y organizaciones de Latinoamérica.</p></details><details><summary>¿La evaluación certifica cumplimiento ISTQB o ISO 29119?</summary><p>No. Es una orientación basada en buenas prácticas. No constituye certificación, auditoría oficial ni declaración de conformidad.</p></details></div></div>
+  </section>
+
+  <section class="contact" id="contacto" aria-labelledby="contact-title"><div class="container contact-in"><div class="eyebrow">Hablemos de tu siguiente nivel</div><h2 id="contact-title">La calidad puede ser tu próxima <em>ventaja competitiva.</em></h2><p>Cuéntame si necesitas mejorar un caso, ordenar una suite, formar un equipo o definir una estrategia. Elegiremos el punto de entrada con mayor valor.</p><div class="contact-links"><a class="button button-primary" href="https://wa.me/51992097896?text=Hola%20Atenas%2C%20quiero%20conversar%20sobre%20servicios%20QA" target="_blank" rel="noopener">WhatsApp Perú</a><a class="button button-light" href="mailto:aitestingservicesperu@gmail.com">Enviar correo</a><a class="button button-light" href="https://www.linkedin.com/in/atenas-quintana" target="_blank" rel="noopener">LinkedIn</a></div><div class="contact-meta"><span>Lima, Perú · Caracas, Venezuela</span><span>Atención remota LATAM</span><span>Respuesta en menos de 48 horas</span></div></div></section>
+
+  <footer><div class="container footer-in"><div class="footer-brand">AI Testing <span>by Atenas</span></div><div>© 2026 Atenas Quintana Blas · Estrategia, formación y calidad de software</div><div class="footer-links"><a href="evaluador.html">Evaluador</a><a href="#faq">FAQ</a><a href="#contacto">Contacto</a></div></div></footer>
+
+  <script>
+    const menuButton=document.getElementById('menuButton');
+    const navLinks=document.getElementById('navLinks');
+    menuButton.addEventListener('click',()=>{const open=navLinks.classList.toggle('open');menuButton.setAttribute('aria-expanded',String(open));menuButton.setAttribute('aria-label',open?'Cerrar menú':'Abrir menú')});
+    navLinks.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{navLinks.classList.remove('open');menuButton.setAttribute('aria-expanded','false');menuButton.setAttribute('aria-label','Abrir menú')}));
+  </script>
 </body>
 </html>
