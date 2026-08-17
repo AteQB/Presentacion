@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /campus/
 
 Sitemap: https://aitesting.lat/sitemap.xml
